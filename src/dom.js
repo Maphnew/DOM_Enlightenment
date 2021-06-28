@@ -30,7 +30,45 @@
         if(typeof params === 'string' && regXContainsTag.test(params)){
             // html 문자열이 확실함.
             // div와 docfrag를 생성해서 div를 docfrag에 추가한 후, div의 innerHTML을 문자열로 설정한 후 첫 번째 자식을 가져옴.
+            var divElm = currentContext.createElement('div');
+            divElm.className = 'hippo-doc-frag-wrapper';
+            var docFrag = currentContext.createDocumentFragment();
+            docFrag.appendChild(divElm);
+            var queryDiv = docFrag.querySelector('div');
+            queryDiv.innerHTML = params;
+            var numberOfChildren = queryDiv.children.length;
+            // html 문자열이 자식들과 함께 전달될 수 있으므로 nodelist에서 루프를 돌며 개체를 채움
+            for (var z = 0; z < numberOfChildren; z++){
+                this[z] = queryDiv.children[z];
+            }
+            // 개체에 length 값을 부여
+            this.length = numberOfChildren;
+            // 개체를 반환
+            return this; // 예를 들어, {0:ELEMENT_NODE,1:ELEMENT_NODE,length:2}를 반환
         }
+
+        // 단일 노드 참조가 전달된 경우, 개체를 채워서 반환
+        if(typeof params === 'object' && params.nodeName){
+            this.length = 1;
+            this[0] = params;
+            return this;
+        }
+        // 개체이지만 노드가 아닌 경우, 노드 리스트나 배열로 가정한다. 그렇지 않은 경우 문자열 선택자이므로 노드 리스트를 만든다.
+        var nodes;
+        if(typeof params !== 'string'){ // 노드 리스트나 배열
+            node = params;
+        }else{
+            nodes = currentContext.querySelectorAll(params.trim());
+        }
+        // 위에서 생성된 배열이나 노드 리스트에 대해 루프를 돌면서 개체를 채움
+        var nodeLength = nodes.length;
+        for(var i = 0; i < nodeLength; i++){
+            this[i] = nodes[i];
+        }
+        // 개체에 length 값을 부여
+        this.length = nodeLength;
+        // 개체를 반환
+        return this; // 예를 들어, {0:ELEMENT_NODE,1:ELEMENT_NODE,length:2}를 반환
     };
 
     // dom을 전역 범위로 노출
