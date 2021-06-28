@@ -10,7 +10,7 @@
 
     var regXContainsTag = /^\s*<(\w+|!)[^>]*>/;
 
-    var GetOrMakeDom = function(parmas, context){
+    var GetOrMakeDom = function(params, context){
         var currentContext = doc;
         if(context){
             if(context.nodeType){ // 문서 노드 혹은 element 노드 중하나
