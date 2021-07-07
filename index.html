@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+
+    <script src="./src/dom.js"></script>
+    <script>
+        // dom()
+        console.log(dom());
+        console.log(dom(''));
+        console.log(dom('body'));
+        console.log(dom('<p>Hello</p><p> World!</p>'));
+        console.log(dom(document.body));
+        console.log(dom([document.body, document.body]));
+        console.log(dom(document.body.children));
+        console.log(dom(dom('body')));
+
+        // dom().html()
+        console.log(dom('ul li:last-child').text('three'));
+        console.log(dom('ul li:last-child').text() === 'three');
+
+        // dom().text()
+        console.log(dom('ul li:last-child').text('three'));
+        console.log(dom('ul li:last-child').text() === 'three');
+
+        // dome().append()
+        dom('ul').append('<li>4</li>');
+        dom('ul').append(document.createElement('li'));
+        dom('ul').append(dom('li:first-child'));
+        
+    </script>
+
+</body>
+</html>

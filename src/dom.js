@@ -56,7 +56,7 @@
         // 개체이지만 노드가 아닌 경우, 노드 리스트나 배열로 가정한다. 그렇지 않은 경우 문자열 선택자이므로 노드 리스트를 만든다.
         var nodes;
         if(typeof params !== 'string'){ // 노드 리스트나 배열
-            node = params;
+            nodes = params;
         }else{
             nodes = currentContext.querySelectorAll(params.trim());
         }
@@ -101,7 +101,7 @@
     dom.fn.text = function(textString){
         if(textString){
             return this.each(function(){ // 매개변수를 가지고 전달된 경우 체인화가 가능 하도록 this를 반환
-                this.innerHTML = htmlString;
+                this.innerHTML = textString;
             });
         }else{
             return this[0].textContent.trim();
