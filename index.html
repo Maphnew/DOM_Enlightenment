@@ -14,7 +14,9 @@
         <li>3</li>
     </ul>
 
-    <script src="./src/dom.js"></script>
+    <script src="./src/dom.js">
+        //https://raw.githubusercontent.com/codylindley/domjs/master/builds/dom.js
+    </script>
     <script>
         // dom()
         console.log(dom());
@@ -38,7 +40,7 @@
         dom('ul').append('<li>4</li>');
         dom('ul').append(document.createElement('li'));
         dom('ul').append(dom('li:first-child'));
-        
+
     </script>
 
 </body>
