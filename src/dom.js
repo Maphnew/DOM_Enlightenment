@@ -88,6 +88,39 @@
         return this; // 예를 들어, {0:ELEMENT_NODE,1:ELEMENT_NODE,length:1}를 반환하여 체인화가 가능하게 한다.
     };
 
+    dom.fn.html = function(htmlString){
+        if(htmlString){
+            return this.each(function(){ // 매개변수를 가지고 전달된 경우 체인화가 가능 하도록 this를 반환
+                this.innerHTML = htmlString;
+            });
+        }else{
+            return this[0].innerHTML;
+        }
+    };
+
+    dom.fn.text = function(textString){
+        if(textString){
+            return this.each(function(){ // 매개변수를 가지고 전달된 경우 체인화가 가능 하도록 this를 반환
+                this.innerHTML = htmlString;
+            });
+        }else{
+            return this[0].textContent.trim();
+        }
+    };
+    
+    dom.fn.append = function(stringOrObject){
+        return this.each(function(){
+            if(typeof stringOrObject === 'string'){
+                this.insertAdjacentHTML('beforeend', stringOrObject);
+            }else{
+                var that = this;
+                dom(stringOrObject).each(function(name, value){
+                    that.insertAdjacentHTML('beforeend',value.outerHTML);
+                });
+            }
+        })
+    };
+
 })(window);
 
 
