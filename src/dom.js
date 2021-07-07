@@ -77,6 +77,17 @@
     // prototype에 대한 단축경로
     dom.fn = GetOrMakeDom.prototype;
 
+    dom.fn.each = function(callback) {
+        var len = this.length; // dom() 호출 시 getOrMakeDom에서 생성되어 반환되는 특정 인스턴스
+
+        for(var i = 0; i < len; i++) {
+            // this값을 element 노드로 설정한 후 매개변수로 전달해서 콜백 함수 호출
+            callback.call(this[i], i, this[i]);
+        }
+
+        return this; // 예를 들어, {0:ELEMENT_NODE,1:ELEMENT_NODE,length:1}를 반환하여 체인화가 가능하게 한다.
+    };
+
 })(window);
 
 
